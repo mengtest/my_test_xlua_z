@@ -118,6 +118,20 @@ list(APPEND THIRDPART_INC  lpeg)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${LPEG_SRC})
 #end lpeg
 
+#begin lfs
+set ( LFS_SRC
+    lfs/lfs.c
+)
+set_property(
+    SOURCE ${LFS_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC  lfs)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${LFS_SRC})
+#end lfs
+
 if (USING_LUAJIT)
 	
     if (APPLE AND NOT IOS AND NOT ANDROID)
