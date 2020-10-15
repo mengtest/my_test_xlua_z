@@ -53,6 +53,21 @@ list(APPEND THIRDPART_INC  lua-rapidjson/include)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${RAPIDJSON_SRC})
 #end lua-rapidjson
 
+#begin skiplist
+set ( SKIPLIST_SRC
+    skiplist/skiplist.c
+    skiplist/lua-skiplist.c
+)
+set_property(
+    SOURCE ${SKIPLIST_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC  skiplist)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${SKIPLIST_SRC})
+#end skiplist
+
 
 if (USING_LUAJIT)
 	
