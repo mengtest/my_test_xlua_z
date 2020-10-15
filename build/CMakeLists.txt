@@ -86,6 +86,20 @@ list(APPEND THIRDPART_INC  rc4)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${RC4_SRC})
 #end rc4
 
+#begin luaprofiler
+set ( LUAPROFILER_SRC
+    luaprofiler/profiler.c
+)
+set_property(
+    SOURCE ${LUAPROFILER_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC  luaprofiler)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${LUAPROFILER_SRC})
+#end luaprofiler
+
 
 if (USING_LUAJIT)
 	
