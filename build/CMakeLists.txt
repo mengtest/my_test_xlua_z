@@ -132,6 +132,21 @@ list(APPEND THIRDPART_INC  lfs)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${LFS_SRC})
 #end lfs
 
+#begin sproto
+set ( SPROTO_SRC
+    sproto/sproto.c
+    sproto/lsproto.c
+)
+set_property(
+    SOURCE ${SPROTO_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC  sproto)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${SPROTO_SRC})
+#end sproto
+
 if (USING_LUAJIT)
 	
     if (APPLE AND NOT IOS AND NOT ANDROID)
