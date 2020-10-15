@@ -133,6 +133,22 @@ list(APPEND THIRDPART_INC  sproto)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${SPROTO_SRC})
 #end sproto
 
+#begin cjson
+set ( CJSON_SRC
+    lua-cjson/strbuf.c
+    lua-cjson/fpconv.c
+    lua-cjson/lua_cjson.c
+)
+set_property(
+    SOURCE ${CJSON_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC  cjson)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${CJSON_SRC})
+#end cjson
+
 if (USING_LUAJIT)
 	
     if (APPLE AND NOT IOS AND NOT ANDROID)
