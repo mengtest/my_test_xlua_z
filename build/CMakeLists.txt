@@ -68,6 +68,24 @@ list(APPEND THIRDPART_INC  skiplist)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${SKIPLIST_SRC})
 #end skiplist
 
+#begin rc4
+set ( RC4_SRC
+    rc4/base64.c
+    rc4/crc.c
+    rc4/md5.c
+    rc4/rc4.c
+    rc4/lrc4.c
+)
+set_property(
+    SOURCE ${RC4_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC  rc4)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${RC4_SRC})
+#end rc4
+
 
 if (USING_LUAJIT)
 	
