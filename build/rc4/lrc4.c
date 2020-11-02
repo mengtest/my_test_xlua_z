@@ -270,7 +270,7 @@ LUA_API void* decrypt_api(unsigned char* data, int data_len, unsigned char* outp
 	return (void*)output;
 }
 
-int
+LUALIB_API int
 luaopen_rc4(lua_State *L)
 {
 #ifdef luaL_checkversion
