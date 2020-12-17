@@ -210,7 +210,7 @@ static int lua_makesign(lua_State *L)
 
 	int i;
 	for (i = 0; i < 64; i++) {
-		int k = dataLen - 64 - 1 + i;
+		int k = dataLen - 64 + i;
 		data[k] = key[i];
 	}
 
