@@ -131,7 +131,7 @@ static int lua_b64_encrypt(lua_State *L)
 	int dest_len = base64_encrypt((unsigned char const*)src, srcLen, dest);
 
 	lua_pushlstring(L, dest, dest_len);
-	lua_pushnumber(L, dest_len);	
+	lua_pushnumber(L, dest_len);
 	return 2;
 }
 
@@ -205,23 +205,22 @@ static int lua_md5i(lua_State *L)
 static int lua_makesign(lua_State *L)
 {
 	size_t dataLen = 0;
-	const char *data = luaL_checklstring(L, 1, &dataLen);
+	char *data = (char *)luaL_checklstring(L, 1, &dataLen);
 	char key[64] = {0x50, 0x51, 0x70, 0x47, 0x69, 0x48, 0x43, 0x43, 0x36, 0x4a, 0x75, 0x74, 0x69, 0x50, 0x70, 0x64, 0x49, 0x62, 0x7a, 0x4d, 0x57, 0x61, 0x50, 0x6c, 0x4d, 0x67, 0x48, 0x70, 0x43, 0x31, 0x6a, 0x50, 0x6e, 0x44, 0x71, 0x6c, 0x65, 0x5a, 0x48, 0x46, 0x62, 0x4b, 0x6a, 0x6d, 0x49, 0x4e, 0x54, 0x62, 0x59, 0x68, 0x50, 0x7a, 0x38, 0x5a, 0x71, 0x79, 0x32, 0x4e, 0x78, 0x57, 0x6c, 0x43, 0x49, 0x36};
 
-	int newDataLen = dataLen + 64;
-	char *tempData = (char *)lua_newuserdata(L, newDataLen);
-
-	strcpy(tempData, data);
-	strcat(tempData, key);
+	int i;
+	for (i = 0; i < 64; i++) {
+		int k = dataLen - 64 - 1 + i;
+		data[k] = key[i];
+	}
 
 	MD5_CTX ctx;
 	unsigned char dest[33] = {0};
 	unsigned char md[16];
 	char temp[3] = {'\0'};
-	int i;
 
 	MD5Init(&ctx);
-    MD5Update(&ctx, (unsigned char*)tempData, newDataLen);
+    MD5Update(&ctx, (unsigned char*)data, dataLen);
     MD5Final(&ctx, md);
 	for(i = 0;i < 16; i++) {
 		sprintf(temp,"%02x",md[i]);
