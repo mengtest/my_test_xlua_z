@@ -58,7 +58,7 @@ int rc4_decrypt(const char*  data, int data_len, const char* key, int key_len, c
 
 	crc currCrc = crcFast((const unsigned char*)copy_data, data_len - 2 );
 	crc originalCrc = ((crc)copy_data[data_len - 2]) << 8 | ((crc)copy_data[data_len - 1] & 0xff);
-	
+
 	if (currCrc == originalCrc)
 	{
 		return data_len - 2;
